@@ -24,6 +24,7 @@ const INFO_PILLS = [
   { emoji: "📅", text: "15 Июня" },
   { emoji: "📍", text: "Локация: NU" },
   { emoji: "👥", text: "Команды по 4 человека" },
+  { emoji: "💳", text: "Регистрация: 3000 тг", highlight: true },
 ];
 
 const PRIZES = [
@@ -223,18 +224,34 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mt-10 flex w-full max-w-3xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-3"
+            className="mt-10 flex w-full max-w-4xl flex-wrap justify-center gap-3"
           >
             {INFO_PILLS.map((pill) => (
               <div
                 key={pill.text}
-                className="flex items-center justify-center gap-2 rounded-full border border-[#1a2e1a] bg-[#0a0f0a]/90 px-5 py-2.5 text-xs text-zinc-400 sm:text-sm"
+                className={`flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-xs sm:text-sm ${
+                  "highlight" in pill && pill.highlight
+                    ? "border-[#00ff00]/40 bg-[#00ff00]/5 font-semibold text-[#00ff00]"
+                    : "border-[#1a2e1a] bg-[#0a0f0a]/90 text-zinc-400"
+                }`}
               >
                 <span aria-hidden="true">{pill.emoji}</span>
                 <span>{pill.text}</span>
               </div>
             ))}
           </motion.div>
+
+          <motion.p
+            custom={3.5}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mt-5 max-w-xl text-center text-sm leading-relaxed text-zinc-500"
+          >
+            Оплата через Kaspi —{" "}
+            <span className="font-semibold text-[#00ff00]">3000 тг</span>. После перевода
+            обязательно загрузите скриншот чека в форме регистрации.
+          </motion.p>
 
           <motion.div
             custom={4}
@@ -294,7 +311,8 @@ export default function Home() {
           </p>
           <p className="mt-4 text-sm text-zinc-600">
             Регистрационный взнос:{" "}
-            <span className="font-medium text-zinc-400">2500 ₸ через Kaspi</span>
+            <span className="font-medium text-[#00ff00]">3000 тг через Kaspi</span>
+            . Скриншот чека загружается в форме регистрации.
           </p>
 
           <div className="mt-12">
@@ -336,10 +354,14 @@ export default function Home() {
               <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
                 Забронируйте место
               </h2>
+              <p className="mt-2 text-lg font-semibold text-[#00ff00]">
+                Регистрация: 3000 тг
+              </p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
-                Заполните форму, оплатите{" "}
-                <span className="font-semibold text-[#00ff00]">2500 ₸</span> через Kaspi
-                и загрузите скриншот чека.
+                Заполните форму и оплатите{" "}
+                <span className="font-semibold text-[#00ff00]">3000 тг</span> через Kaspi.
+                Затем обязательно загрузите скриншот чека Kaspi в разделе
+                «Подтверждение оплаты» ниже — без чека заявка не будет принята.
               </p>
               <div className="mt-10">
                 <RegistrationForm />

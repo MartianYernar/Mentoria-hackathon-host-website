@@ -196,8 +196,12 @@ export default function RegistrationForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-600">
+          <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-600">
             Подтверждение оплаты
+          </p>
+          <p className="mb-3 text-xs leading-relaxed text-zinc-500">
+            Загрузите скриншот чека Kaspi на 3000 тг — это обязательное поле
+            для завершения регистрации.
           </p>
           <ReceiptUpload
             file={receiptFile}

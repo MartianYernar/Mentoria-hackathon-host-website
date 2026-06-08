@@ -19,10 +19,11 @@ export default function KaspiPaymentBlock() {
           <CreditCard className="h-4 w-4 text-red-400" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-white">2500 ₸ через Kaspi</h3>
+          <h3 className="text-lg font-semibold text-white">3000 тг через Kaspi</h3>
           <p className="mt-1 text-sm leading-relaxed text-zinc-500">
             Переведите регистрационный взнос перед отправкой формы. Укажите
-            название команды в комментарии к платежу.
+            название команды в комментарии к платежу. После оплаты загрузите
+            скриншот чека в раздел «Подтверждение оплаты» ниже.
           </p>
         </div>
       </div>
