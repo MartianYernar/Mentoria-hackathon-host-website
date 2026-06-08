@@ -1,9 +1,10 @@
 "use client";
 
-import BahandiSplitTitle from "@/components/BahandiSplitTitle";
 import FAQAccordion from "@/components/FAQAccordion";
+import MentoriaLagTitle from "@/components/MentoriaLagTitle";
 import RegistrationForm from "@/components/RegistrationForm";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const EVENT_START = new Date("2026-06-15T09:00:00");
@@ -23,6 +24,16 @@ const INFO_PILLS = [
   { emoji: "📅", text: "15 Июня" },
   { emoji: "📍", text: "Локация: NU" },
   { emoji: "👥", text: "Команды по 4 человека" },
+];
+
+const PRIZES = [
+  { title: "1,000,000 тг", desc: "Главный денежный призовой фонд" },
+  { title: "Сертификаты", desc: "Официальное подтверждение ваших достижений" },
+  { title: "Скидка на Master Education 20%", desc: "На обучение в Master Education" },
+  {
+    title: "Стажировка",
+    desc: "Возможно стажировка в компании Bahandi",
+  },
 ];
 
 const TIMER_UNITS = [
@@ -115,7 +126,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-black text-white">
-      {/* Static grid + radial glow — zero JS cost */}
       <div
         className="pointer-events-none fixed inset-0 bg-[linear-gradient(rgba(14,38,21,0.28)_1px,transparent_1px),linear-gradient(90deg,rgba(14,38,21,0.28)_1px,transparent_1px)] bg-[size:48px_48px]"
         aria-hidden="true"
@@ -125,26 +135,29 @@ export default function Home() {
         aria-hidden="true"
       />
 
-      {/* ── Nav ── */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={SPRING}
         className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-5 py-6 sm:px-8"
       >
-        <a
-          href="#"
-          className="text-lg font-black tracking-[0.14em] text-[#00ff00] sm:text-xl"
-        >
-          BAHANDI
+        <a href="#" className="flex items-center gap-3">
+          <Image
+            src="/mentoria-logo.png"
+            alt="Mentoria Hackathon"
+            width={640}
+            height={640}
+            priority
+            className="h-10 w-auto rounded-xl sm:h-11"
+          />
+          <span className="hidden text-sm font-bold tracking-wide text-[#00ff00] sm:inline">
+            Mentoria Hackathon
+          </span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           <a href="#about" className="text-sm text-zinc-400 transition-colors hover:text-white">
             О хакатоне
-          </a>
-          <a href="#tracks" className="text-sm text-zinc-400 transition-colors hover:text-white">
-            Треки
           </a>
           <a href="#faq" className="text-sm text-zinc-400 transition-colors hover:text-white">
             FAQ
@@ -168,9 +181,7 @@ export default function Home() {
       </motion.header>
 
       <main className="relative z-10 mx-auto max-w-6xl px-5 pb-28 sm:px-8">
-        {/* ── Hero ── */}
         <section className="flex flex-col items-center pb-20 pt-8 text-center sm:pt-14">
-          {/* Status capsule */}
           <motion.div
             custom={0}
             initial="hidden"
@@ -187,7 +198,6 @@ export default function Home() {
             </span>
           </motion.div>
 
-          {/* Split title */}
           <motion.div
             custom={1}
             initial="hidden"
@@ -195,10 +205,9 @@ export default function Home() {
             variants={fadeUp}
             className="w-full"
           >
-            <BahandiSplitTitle />
+            <MentoriaLagTitle />
           </motion.div>
 
-          {/* Subtitle */}
           <motion.p
             custom={2}
             initial="hidden"
@@ -209,7 +218,6 @@ export default function Home() {
             ХАКАТОН
           </motion.p>
 
-          {/* Info pills */}
           <motion.div
             custom={3}
             initial="hidden"
@@ -228,7 +236,6 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* Countdown */}
           <motion.div
             custom={4}
             initial="hidden"
@@ -242,7 +249,6 @@ export default function Home() {
             <HeroCountdown />
           </motion.div>
 
-          {/* CTAs */}
           <motion.div
             custom={5}
             initial="hidden"
@@ -266,7 +272,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* ── О хакатоне ── */}
         <motion.section
           id="about"
           initial={{ opacity: 0, y: 24 }}
@@ -282,60 +287,37 @@ export default function Home() {
             Два этапа. Один миллион тенге. Без границ.
           </h2>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-500 sm:text-base">
-            BAHANDI — масштабный хакатон с призовым фондом{" "}
-            <span className="font-semibold text-[#00ff00]">1 000 000 ₸</span>.
-            Сначала жёсткий онлайн-отбор, затем офлайн-финал 27–28 июня в
-            Nazarbayev University, Астана. Открыто для всех — включая студентов.
+            Mentoria Hackathon — масштабное событие для разработчиков и
+            дизайнеров. Сначала тщательный онлайн-отбор, затем офлайн-финал
+            27–28 июня в Nazarbayev University, Астана. Открыто для всех —
+            включая студентов.
           </p>
           <p className="mt-4 text-sm text-zinc-600">
             Регистрационный взнос:{" "}
             <span className="font-medium text-zinc-400">2500 ₸ через Kaspi</span>
           </p>
-        </motion.section>
 
-        {/* ── Треки ── */}
-        <motion.section
-          id="tracks"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={SPRING}
-          className="scroll-mt-24 border-t border-[#0e2615] py-20"
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#00ff00]">
-            Треки
-          </p>
-          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-            Выберите направление
-          </h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                title: "Web & Mobile",
-                desc: "Продукты, которыми пользуются миллионы каждый день.",
-              },
-              {
-                title: "AI & Data",
-                desc: "Модели, аналитика и intelligent-решения нового поколения.",
-              },
-              {
-                title: "Social Impact",
-                desc: "Технологии, которые меняют общество к лучшему.",
-              },
-            ].map((track) => (
-              <div
-                key={track.title}
-                className="rounded-xl border border-[#1a2e1a] bg-[#0a0f0a] p-6"
-              >
-                <div className="mb-4 h-[2px] w-10 bg-[#00ff00]" />
-                <h3 className="font-bold text-white">{track.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-500">{track.desc}</p>
-              </div>
-            ))}
+          <div className="mt-12">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#00ff00]">
+              Призы и бонусы
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {PRIZES.map((prize) => (
+                <div
+                  key={prize.title}
+                  className="rounded-xl border border-[#1a2e1a] bg-[#0a0f0a] p-6"
+                >
+                  <div className="mb-3 h-[2px] w-10 bg-[#00ff00]" />
+                  <h3 className="text-lg font-bold text-[#00ff00]">{prize.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+                    {prize.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.section>
 
-        {/* ── Registration form ── */}
         <motion.section
           ref={registerRef}
           id="register"
@@ -366,7 +348,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* ── FAQ ── */}
         <motion.section
           id="faq"
           initial={{ opacity: 0, y: 24 }}
@@ -388,7 +369,7 @@ export default function Home() {
       </main>
 
       <footer className="relative z-10 border-t border-[#0e2615] py-8 text-center">
-        <p className="text-xs text-zinc-700">© 2026 BAHANDI Hackathon · Астана</p>
+        <p className="text-xs text-zinc-700">© 2026 Mentoria Hackathon · Астана</p>
       </footer>
     </div>
   );

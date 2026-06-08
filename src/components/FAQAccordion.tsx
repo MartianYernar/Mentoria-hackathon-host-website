@@ -18,12 +18,12 @@ const FAQ_ITEMS = [
   {
     question: "Как проходит отбор?",
     answer:
-      "Сначала все команды проходят онлайн-тур с жёсткой оценкой проекта. В офлайн-финал в Астане попадают только лучшие.",
+      "Сначала все команды проходят онлайн-тур с тщательной оценкой проекта. В офлайн-финал в Астане попадают только лучшие.",
   },
   {
     question: "Какой призовой фонд?",
     answer:
-      "Общий призовой фонд — 1 000 000 ₸. Победители получают денежные призы, мерч и менторские сессии с экспертами индустрии.",
+      "Победители получают: 1,000,000 тг, сертификаты, скидку на Master Education 20%, а также возможно стажировка в компании Bahandi.",
   },
   {
     question: "Где проходит офлайн-финал?",
@@ -60,7 +60,7 @@ export default function FAQAccordion() {
               <motion.span
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="shrink-0 text-zinc-600 transition-colors group-hover:text-violet-400"
+                className="shrink-0 text-zinc-600 transition-colors group-hover:text-[#00ff00]"
               >
                 <ChevronDown className="h-4 w-4" />
               </motion.span>

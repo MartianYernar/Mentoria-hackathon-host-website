@@ -55,14 +55,14 @@ export default function ReceiptUpload({
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="flex items-center gap-4 rounded-2xl bg-white/[0.03] p-4 backdrop-blur-md"
           >
-            <div className="relative shrink-0 overflow-hidden rounded-xl ring-1 ring-violet-500/30">
+            <div className="relative shrink-0 overflow-hidden rounded-xl ring-1 ring-[#00ff00]/30">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={previewUrl}
                 alt="Скриншот чека"
                 className="h-16 w-16 object-cover"
               />
-              <div className="absolute inset-0 bg-violet-500/10 mix-blend-overlay" />
+              <div className="absolute inset-0 bg-[#00ff00]/10 mix-blend-overlay" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-white">{file.name}</p>
@@ -98,8 +98,8 @@ export default function ReceiptUpload({
             whileHover={{ scale: 1.005 }}
             className={`cursor-pointer rounded-2xl border border-dashed px-6 py-8 text-center transition-colors duration-300 ${
               isDragging
-                ? "border-violet-400/60 bg-violet-500/5"
-                : "border-white/[0.08] bg-white/[0.01] hover:border-violet-500/30 hover:bg-white/[0.02]"
+                ? "border-[#00ff00]/60 bg-[#00ff00]/5"
+                : "border-white/[0.08] bg-white/[0.01] hover:border-[#00ff00]/30 hover:bg-white/[0.02]"
             }`}
           >
             <input
@@ -116,7 +116,7 @@ export default function ReceiptUpload({
               <ImagePlus className="mx-auto h-6 w-6 text-zinc-600" />
               <p className="mt-3 text-sm text-zinc-400">
                 Перетащите чек Kaspi или{" "}
-                <span className="text-violet-400">выберите файл</span>
+                <span className="text-[#00ff00]">выберите файл</span>
               </p>
               <p className="mt-1 text-xs text-zinc-700">PNG, JPG, WEBP</p>
             </motion.div>

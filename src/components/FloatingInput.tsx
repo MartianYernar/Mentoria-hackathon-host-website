@@ -41,7 +41,7 @@ export default function FloatingInput({
       <label
         htmlFor={id}
         className={`mb-1 block text-[11px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 ${
-          focused ? "text-violet-400" : "text-zinc-600"
+          focused ? "text-[#00ff00]" : "text-zinc-600"
         }`}
       >
         {label}
@@ -61,7 +61,7 @@ export default function FloatingInput({
       />
       <div className="relative h-px w-full bg-white/[0.08]">
         <motion.div
-          className="absolute inset-0 origin-left bg-gradient-to-r from-violet-500 via-fuchsia-400 to-cyan-400"
+          className="absolute inset-0 origin-left bg-[#00ff00]"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: focused ? 1 : value ? 0.3 : 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}

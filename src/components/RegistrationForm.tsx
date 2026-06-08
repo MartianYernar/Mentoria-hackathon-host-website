@@ -14,7 +14,6 @@ const GOOGLE_SCRIPT_URL =
 interface FormFields {
   fullName: string;
   email: string;
-  github: string;
   teamName: string;
   telegram: string;
   phone: string;
@@ -23,17 +22,16 @@ interface FormFields {
 interface SubmissionPayload {
   name: string;
   email: string;
-  github: string;
   teamName: string;
   telegram: string;
   phone: string;
   receiptImage: string;
+  timestamp: string;
 }
 
 const INITIAL_FORM: FormFields = {
   fullName: "",
   email: "",
-  github: "",
   teamName: "",
   telegram: "",
   phone: "",
@@ -109,11 +107,11 @@ export default function RegistrationForm() {
       const payload: SubmissionPayload = {
         name: form.fullName,
         email: form.email,
-        github: form.github,
         teamName: form.teamName,
         telegram: form.telegram,
         phone: form.phone,
         receiptImage,
+        timestamp: new Date().toISOString(),
       };
 
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -159,23 +157,13 @@ export default function RegistrationForm() {
             delay={0.05}
           />
           <FloatingInput
-            id="github"
-            label="GitHub профиль"
-            type="url"
-            value={form.github}
-            onChange={(v) => handleChange("github", v)}
-            placeholder="https://github.com/ivanov"
-            required
-            delay={0.1}
-          />
-          <FloatingInput
             id="teamName"
             label="Название команды"
             value={form.teamName}
             onChange={(v) => handleChange("teamName", v)}
             placeholder="Code Crushers"
             required
-            delay={0.15}
+            delay={0.1}
           />
           <FloatingInput
             id="telegram"
@@ -186,7 +174,7 @@ export default function RegistrationForm() {
             pattern="^@?\w{5,32}$"
             title="Введите корректный Telegram, например @username"
             required
-            delay={0.2}
+            delay={0.15}
           />
           <FloatingInput
             id="phone"
@@ -196,7 +184,7 @@ export default function RegistrationForm() {
             onChange={(v) => handleChange("phone", v)}
             placeholder="+7 (777) 123-45-67"
             required
-            delay={0.25}
+            delay={0.2}
           />
         </div>
 
@@ -239,11 +227,9 @@ export default function RegistrationForm() {
           whileHover={isSubmitting ? {} : { scale: 1.02 }}
           whileTap={isSubmitting ? {} : { scale: 0.98 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="group relative w-full overflow-hidden rounded-full py-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
+          className="w-full rounded-md bg-[#00ff00] py-4 text-sm font-black text-black transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-emerald-500 animate-shimmer opacity-90 transition-opacity group-hover:opacity-100" />
-          <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-emerald-500 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-40" />
-          <span className="relative z-10 flex items-center justify-center gap-2">
+          <span className="flex items-center justify-center gap-2">
             {isSubmitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />

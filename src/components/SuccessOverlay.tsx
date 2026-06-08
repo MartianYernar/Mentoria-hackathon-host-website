@@ -22,7 +22,7 @@ export default function SuccessOverlay({ visible, onReset }: SuccessOverlayProps
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
-              className="absolute rounded-full border border-violet-500/20"
+              className="absolute rounded-full border border-[#00ff00]/20"
               initial={{ width: 80, height: 80, opacity: 0.6 }}
               animate={{ width: 600, height: 600, opacity: 0 }}
               transition={{ duration: 2, delay: i * 0.3, ease: "easeOut" }}
@@ -32,7 +32,7 @@ export default function SuccessOverlay({ visible, onReset }: SuccessOverlayProps
           {Array.from({ length: 12 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute h-1.5 w-1.5 rounded-full bg-violet-400"
+              className="absolute h-1.5 w-1.5 rounded-full bg-[#00ff00]"
               initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
               animate={{
                 x: Math.cos((i / 12) * Math.PI * 2) * 180,
@@ -49,9 +49,9 @@ export default function SuccessOverlay({ visible, onReset }: SuccessOverlayProps
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-              className="relative mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/30 to-emerald-500/20 ring-1 ring-violet-400/30"
+              className="relative mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-[#00ff00]/15 ring-1 ring-[#00ff00]/40"
             >
-              <Check className="h-10 w-10 text-violet-300" strokeWidth={2.5} />
+              <Check className="h-10 w-10 text-[#00ff00]" strokeWidth={2.5} />
             </motion.div>
 
             <motion.div
@@ -60,11 +60,11 @@ export default function SuccessOverlay({ visible, onReset }: SuccessOverlayProps
               transition={{ delay: 0.8, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="mb-3 flex items-center justify-center gap-2">
-                <Sparkles className="h-4 w-4 text-violet-400" />
-                <span className="text-xs font-medium uppercase tracking-[0.25em] text-violet-400">
+                <Sparkles className="h-4 w-4 text-[#00ff00]" />
+                <span className="text-xs font-medium uppercase tracking-[0.25em] text-[#00ff00]">
                   Регистрация подтверждена
                 </span>
-                <Sparkles className="h-4 w-4 text-violet-400" />
+                <Sparkles className="h-4 w-4 text-[#00ff00]" />
               </div>
               <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                 Вы в игре!
@@ -83,7 +83,7 @@ export default function SuccessOverlay({ visible, onReset }: SuccessOverlayProps
               transition={{ delay: 1.2, duration: 0.4 }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-10 rounded-full border border-white/10 px-6 py-2.5 text-sm text-zinc-400 transition-colors hover:border-white/20 hover:text-white"
+              className="mt-10 rounded-md border border-[#00ff00] px-6 py-2.5 text-sm font-medium text-[#00ff00] transition-colors hover:bg-[#00ff00]/10"
             >
               Зарегистрировать ещё одного участника
             </motion.button>

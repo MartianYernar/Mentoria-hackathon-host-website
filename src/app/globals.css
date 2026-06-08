@@ -63,8 +63,8 @@ body {
   animation: prize-glow 3s ease-in-out infinite;
 }
 
-/* BAHANDI neon lag — 1s glitch every 8s, GPU-only (transform + opacity) */
-@keyframes bahandi-lag-primary {
+/* Mentoria title neon lag — 1s glitch every 8s, GPU-only (transform + opacity) */
+@keyframes mentoria-lag-primary {
   0%,
   87.5% {
     opacity: 0;
@@ -97,7 +97,7 @@ body {
   }
 }
 
-@keyframes bahandi-lag-secondary {
+@keyframes mentoria-lag-secondary {
   0%,
   87.5% {
     opacity: 0;
@@ -126,23 +126,23 @@ body {
   }
 }
 
-.bahandi-title__lag {
+.mentoria-title__lag {
   will-change: transform, opacity;
   clip-path: inset(38% 0 38% 0);
 }
 
-.bahandi-title__lag--primary {
-  animation: bahandi-lag-primary 8s linear infinite;
+.mentoria-title__lag--primary {
+  animation: mentoria-lag-primary 8s linear infinite;
 }
 
-.bahandi-title__lag--secondary {
+.mentoria-title__lag--secondary {
   clip-path: inset(46% 0 46% 0);
-  animation: bahandi-lag-secondary 8s linear infinite;
+  animation: mentoria-lag-secondary 8s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bahandi-title__lag--primary,
-  .bahandi-title__lag--secondary {
+  .mentoria-title__lag--primary,
+  .mentoria-title__lag--secondary {
     animation: none;
     opacity: 0;
   }
