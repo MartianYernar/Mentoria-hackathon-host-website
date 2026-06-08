@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000;
+  color: #fafafa;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes pulse-glow-border {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.25),
+      0 0 40px rgba(34, 197, 94, 0.08),
+      inset 0 0 20px rgba(139, 92, 246, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(139, 92, 246, 0.45),
+      0 0 64px rgba(34, 197, 94, 0.15),
+      inset 0 0 28px rgba(139, 92, 246, 0.08);
+  }
+}
+
+@keyframes prize-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 40px rgba(139, 92, 246, 0.5),
+      0 0 80px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 60px rgba(139, 92, 246, 0.7),
+      0 0 100px rgba(34, 197, 94, 0.35);
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-pulse-glow-border {
+  animation: pulse-glow-border 2.5s ease-in-out infinite;
+}
+
+.animate-prize-glow {
+  animation: prize-glow 3s ease-in-out infinite;
+}
+
+/* BAHANDI neon lag — 1s glitch every 8s, GPU-only (transform + opacity) */
+@keyframes bahandi-lag-primary {
+  0%,
+  87.5% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  88% {
+    opacity: 1;
+    transform: translate3d(-14px, 0, 0);
+  }
+  88.8% {
+    opacity: 1;
+    transform: translate3d(10px, 0, 0);
+  }
+  89.5% {
+    opacity: 1;
+    transform: translate3d(-8px, 0, 0);
+  }
+  90.2% {
+    opacity: 0.85;
+    transform: translate3d(6px, 0, 0);
+  }
+  91% {
+    opacity: 0.4;
+    transform: translate3d(-3px, 0, 0);
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bahandi-lag-secondary {
+  0%,
+  87.5% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  88.2% {
+    opacity: 0.7;
+    transform: translate3d(12px, 0, 0);
+  }
+  89% {
+    opacity: 1;
+    transform: translate3d(-10px, 0, 0);
+  }
+  89.8% {
+    opacity: 0.6;
+    transform: translate3d(7px, 0, 0);
+  }
+  90.5% {
+    opacity: 0.3;
+    transform: translate3d(-5px, 0, 0);
+  }
+  91.5%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bahandi-title__lag {
+  will-change: transform, opacity;
+  clip-path: inset(38% 0 38% 0);
+}
+
+.bahandi-title__lag--primary {
+  animation: bahandi-lag-primary 8s linear infinite;
+}
+
+.bahandi-title__lag--secondary {
+  clip-path: inset(46% 0 46% 0);
+  animation: bahandi-lag-secondary 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bahandi-title__lag--primary,
+  .bahandi-title__lag--secondary {
+    animation: none;
+    opacity: 0;
+  }
 }
