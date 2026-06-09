@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CreditCard, QrCode } from "lucide-react";
+import { CreditCard } from "lucide-react";
 
 export default function KaspiPaymentBlock() {
   return (
@@ -19,30 +19,23 @@ export default function KaspiPaymentBlock() {
           <CreditCard className="h-4 w-4 text-red-400" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-white">3000 тг через Kaspi</h3>
+          <h3 className="text-lg font-semibold text-white">3000 тенге с одной команды</h3>
           <p className="mt-1 text-sm leading-relaxed text-zinc-500">
-            Переведите регистрационный взнос перед отправкой формы. Укажите
-            название команды в комментарии к платежу. После оплаты загрузите
-            скриншот чека в раздел «Подтверждение оплаты» ниже.
+            Переведите взнос через Kaspi до 13 июня. В комментарии к платежу
+            укажите название команды. После оплаты загрузите скриншот чека в
+            раздел «Подтверждение оплаты» ниже.
           </p>
         </div>
       </div>
 
-      <div className="mt-5 grid gap-6 sm:grid-cols-2">
-        <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-600">
-            Номер Kaspi
-          </p>
-          <p className="mt-1.5 font-mono text-sm text-zinc-300">
-            +7 (XXX) XXX-XX-XX
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/[0.03]">
-            <QrCode className="h-6 w-6 text-zinc-700" />
-          </div>
-          <p className="text-xs text-zinc-600">QR-код (скоро)</p>
-        </div>
+      <div className="mt-5">
+        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-600">
+          Номер Kaspi
+        </p>
+        <p className="mt-1.5 text-sm text-zinc-300">
+          +7 777 817 0007{" "}
+          <span className="text-zinc-500">К. Султанмахмуд</span>
+        </p>
       </div>
     </motion.div>
   );

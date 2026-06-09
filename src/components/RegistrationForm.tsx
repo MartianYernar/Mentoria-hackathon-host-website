@@ -200,8 +200,8 @@ export default function RegistrationForm() {
             Подтверждение оплаты
           </p>
           <p className="mb-3 text-xs leading-relaxed text-zinc-500">
-            Загрузите скриншот чека Kaspi на 3000 тг — это обязательное поле
-            для завершения регистрации.
+            Загрузите скриншот чека Kaspi (3000 тенге с одной команды) — это
+            обязательное поле для завершения регистрации.
           </p>
           <ReceiptUpload
             file={receiptFile}

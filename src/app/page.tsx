@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const EVENT_START = new Date("2026-06-15T09:00:00");
+// Registration closes June 13, 2026 at 00:00 (Astana, UTC+5)
+const REGISTRATION_DEADLINE = new Date("2026-06-13T00:00:00+05:00");
 
 const SPRING = { type: "spring" as const, stiffness: 100, damping: 15 };
 
@@ -21,10 +22,11 @@ const fadeUp = {
 };
 
 const INFO_PILLS = [
-  { emoji: "📅", text: "15 Июня" },
-  { emoji: "📍", text: "Локация: NU" },
-  { emoji: "👥", text: "Команды по 4 человека" },
-  { emoji: "💳", text: "Регистрация: 3000 тг", highlight: true },
+  { emoji: "📅", text: "27–28 июня · финальный офлайн тур" },
+  { emoji: "📍", text: "Локация: NU (Астана)" },
+  { emoji: "👥", text: "Команду (от 1 до 4 человек)" },
+  { emoji: "🎓", text: "От школьников до студентов" },
+  { emoji: "💳", text: "3000 тенге с одной команды", highlight: true },
 ];
 
 const PRIZES = [
@@ -52,7 +54,7 @@ interface TimeLeft {
 }
 
 function getTimeLeft(): TimeLeft {
-  const diff = EVENT_START.getTime() - Date.now();
+  const diff = REGISTRATION_DEADLINE.getTime() - Date.now();
   if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   return {
     days: Math.floor(diff / 86_400_000),
@@ -248,9 +250,9 @@ export default function Home() {
             variants={fadeUp}
             className="mt-5 max-w-xl text-center text-sm leading-relaxed text-zinc-500"
           >
-            Оплата через Kaspi —{" "}
-            <span className="font-semibold text-[#00ff00]">3000 тг</span>. После перевода
-            обязательно загрузите скриншот чека в форме регистрации.
+            Взнос —{" "}
+            <span className="font-semibold text-[#00ff00]">3000 тенге с одной команды</span>{" "}
+            через Kaspi. После перевода загрузите скриншот чека в форме регистрации.
           </motion.p>
 
           <motion.div
@@ -261,7 +263,7 @@ export default function Home() {
             className="mt-14 w-full max-w-2xl sm:max-w-3xl"
           >
             <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.32em] text-zinc-500">
-              До начала осталось
+              До конца регистрации осталось
             </p>
             <HeroCountdown />
           </motion.div>
@@ -301,18 +303,38 @@ export default function Home() {
             О хакатоне
           </p>
           <h2 className="mt-4 max-w-2xl text-3xl font-bold text-white sm:text-4xl">
-            Два этапа. Один миллион тенге. Без границ.
+            Два этапа. Призовой фонд — 1 000 000 тенге.
           </h2>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-500 sm:text-base">
-            Mentoria Hackathon — масштабное событие для разработчиков и
-            дизайнеров. Сначала тщательный онлайн-отбор, затем офлайн-финал
-            27–28 июня в Nazarbayev University, Астана. Открыто для всех —
-            включая студентов.
+            Mentoria Hackathon — соревнование для школьников и студентов, которые
+            хотят за короткий срок собрать рабочий продукт. Участвовать можно
+            одному или командой от 1 до 4 человек.
           </p>
-          <p className="mt-4 text-sm text-zinc-600">
+
+          <div className="mt-10 max-w-2xl">
+            <h3 className="text-xl font-bold text-white sm:text-2xl">
+              Процесс проведения Хакатона
+            </h3>
+            <div className="mt-5 space-y-4 text-sm leading-relaxed text-zinc-500 sm:text-base">
+              <p>
+                Первый тур онлайн с 13 по 18 июня. Второй тур офлайн с 27–28
+                июня. На финальный тур будут отбираться 25–30 лучших команд.
+              </p>
+              <p>
+                Финальный офлайн-тур проходит в Nazarbayev University, Астана.
+                Команды работают над проектом на площадке, презентуют результат
+                жюри и борются за главный приз.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm text-zinc-600">
             Регистрационный взнос:{" "}
-            <span className="font-medium text-[#00ff00]">3000 тг через Kaspi</span>
-            . Скриншот чека загружается в форме регистрации.
+            <span className="font-medium text-[#00ff00]">
+              3000 тенге с одной команды через Kaspi
+            </span>
+            . Скриншот чека загружается в форме регистрации. Регистрация
+            закрывается 13 июня в 00:00.
           </p>
 
           <div className="mt-12">
@@ -355,13 +377,16 @@ export default function Home() {
                 Забронируйте место
               </h2>
               <p className="mt-2 text-lg font-semibold text-[#00ff00]">
-                Регистрация: 3000 тг
+                3000 тенге с одной команды
               </p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
-                Заполните форму и оплатите{" "}
-                <span className="font-semibold text-[#00ff00]">3000 тг</span> через Kaspi.
-                Затем обязательно загрузите скриншот чека Kaspi в разделе
-                «Подтверждение оплаты» ниже — без чека заявка не будет принята.
+                Заполните форму и переведите{" "}
+                <span className="font-semibold text-[#00ff00]">
+                  3000 тенге с одной команды
+                </span>{" "}
+                через Kaspi на номер +7 777 817 0007 (К. Султанмахмуд). Затем
+                обязательно загрузите скриншот чека в разделе «Подтверждение
+                оплаты» ниже — без чека заявка не будет принята.
               </p>
               <div className="mt-10">
                 <RegistrationForm />
