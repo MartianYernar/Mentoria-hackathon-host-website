@@ -65,6 +65,10 @@ export default function RegistrationForm() {
       setReceiptPreview(null);
       return;
     }
+    if (!receiptFile.type.startsWith("image/")) {
+      setReceiptPreview(null);
+      return;
+    }
     const url = URL.createObjectURL(receiptFile);
     setReceiptPreview(url);
     return () => URL.revokeObjectURL(url);

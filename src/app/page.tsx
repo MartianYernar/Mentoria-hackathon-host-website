@@ -3,6 +3,7 @@
 import FAQAccordion from "@/components/FAQAccordion";
 import MentoriaLagTitle from "@/components/MentoriaLagTitle";
 import RegistrationForm from "@/components/RegistrationForm";
+import VenueSection from "@/components/VenueSection";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -327,6 +328,8 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          <VenueSection />
 
           <p className="mt-6 text-sm text-zinc-600">
             Регистрационный взнос:{" "}

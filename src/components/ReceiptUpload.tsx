@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ImagePlus, X } from "lucide-react";
+import { FileText, ImagePlus, X } from "lucide-react";
 import { DragEvent, useRef, useState } from "react";
 
 interface ReceiptUploadProps {
@@ -9,6 +9,14 @@ interface ReceiptUploadProps {
   previewUrl: string | null;
   onFileSelect: (file: File) => void;
   onRemove: () => void;
+}
+
+function isAllowedReceipt(file: File): boolean {
+  return (
+    file.type.startsWith("image/") ||
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf")
+  );
 }
 
 export default function ReceiptUpload({
@@ -22,7 +30,7 @@ export default function ReceiptUpload({
 
   function handleFile(fileList: FileList | null) {
     const selected = fileList?.[0];
-    if (selected && selected.type.startsWith("image/")) {
+    if (selected && isAllowedReceipt(selected)) {
       onFileSelect(selected);
     }
   }
@@ -43,10 +51,13 @@ export default function ReceiptUpload({
     handleFile(e.dataTransfer.files);
   }
 
+  const isPdf =
+    file?.type === "application/pdf" || file?.name.toLowerCase().endsWith(".pdf");
+
   return (
     <div className="relative min-h-[120px]">
       <AnimatePresence mode="wait">
-        {previewUrl && file ? (
+        {file ? (
           <motion.div
             key="preview"
             initial={{ opacity: 0, x: -40, scale: 0.9 }}
@@ -55,14 +66,20 @@ export default function ReceiptUpload({
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="flex items-center gap-4 rounded-2xl bg-white/[0.03] p-4 backdrop-blur-md"
           >
-            <div className="relative shrink-0 overflow-hidden rounded-xl ring-1 ring-[#00ff00]/30">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={previewUrl}
-                alt="Скриншот чека"
-                className="h-16 w-16 object-cover"
-              />
-              <div className="absolute inset-0 bg-[#00ff00]/10 mix-blend-overlay" />
+            <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl ring-1 ring-[#00ff00]/30">
+              {isPdf ? (
+                <FileText className="h-8 w-8 text-[#00ff00]" />
+              ) : (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={previewUrl ?? ""}
+                    alt="Скриншот чека"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[#00ff00]/10 mix-blend-overlay" />
+                </>
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-white">{file.name}</p>
@@ -105,7 +122,7 @@ export default function ReceiptUpload({
             <input
               ref={inputRef}
               type="file"
-              accept="image/*"
+              accept="image/*,.pdf,application/pdf"
               className="hidden"
               onChange={(e) => handleFile(e.target.files)}
             />
@@ -118,7 +135,7 @@ export default function ReceiptUpload({
                 Перетащите чек Kaspi или{" "}
                 <span className="text-[#00ff00]">выберите файл</span>
               </p>
-              <p className="mt-1 text-xs text-zinc-700">PNG, JPG, WEBP</p>
+              <p className="mt-1 text-xs text-zinc-700">PNG, JPG, WEBP, PDF</p>
             </motion.div>
           </motion.div>
         )}
