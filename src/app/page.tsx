@@ -1,6 +1,7 @@
 "use client";
 
 import FAQAccordion from "@/components/FAQAccordion";
+import HackathonInfoSection from "@/components/HackathonInfoSection";
 import MentoriaLagTitle from "@/components/MentoriaLagTitle";
 import RegistrationForm from "@/components/RegistrationForm";
 import VenueSection from "@/components/VenueSection";
@@ -27,7 +28,7 @@ const INFO_PILLS = [
   { emoji: "📍", text: "Локация: NU (Астана)" },
   { emoji: "👥", text: "Команду (от 1 до 4 человек)" },
   { emoji: "🎓", text: "От школьников до студентов" },
-  { emoji: "💳", text: "3000 тенге с одной команды", highlight: true },
+  { emoji: "✨", text: "Участие бесплатное", highlight: true },
 ];
 
 const PRIZES = [
@@ -251,9 +252,9 @@ export default function Home() {
             variants={fadeUp}
             className="mt-5 max-w-xl text-center text-sm leading-relaxed text-zinc-500"
           >
-            Взнос —{" "}
-            <span className="font-semibold text-[#00ff00]">3000 тенге с одной команды</span>{" "}
-            через Kaspi. После перевода загрузите скриншот чека в форме регистрации.
+            Участие{" "}
+            <span className="font-semibold text-[#00ff00]">бесплатное</span>.
+            Регистрация открыта до 13 июня.
           </motion.p>
 
           <motion.div
@@ -291,6 +292,8 @@ export default function Home() {
             </a>
           </motion.div>
         </section>
+
+        <HackathonInfoSection />
 
         <motion.section
           id="about"
@@ -332,12 +335,7 @@ export default function Home() {
           <VenueSection />
 
           <p className="mt-6 text-sm text-zinc-600">
-            Регистрационный взнос:{" "}
-            <span className="font-medium text-[#00ff00]">
-              3000 тенге с одной команды через Kaspi
-            </span>
-            . Скриншот чека загружается в форме регистрации. Регистрация
-            закрывается 13 июня в 00:00.
+            Регистрация закрывается 13 июня в 00:00. Участие бесплатное.
           </p>
 
           <div className="mt-12">
@@ -380,16 +378,11 @@ export default function Home() {
                 Забронируйте место
               </h2>
               <p className="mt-2 text-lg font-semibold text-[#00ff00]">
-                3000 тенге с одной команды
+                Участие бесплатное
               </p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
-                Заполните форму и переведите{" "}
-                <span className="font-semibold text-[#00ff00]">
-                  3000 тенге с одной команды
-                </span>{" "}
-                через Kaspi на номер +7 777 817 0007 (К. Султанмахмуд). Затем
-                обязательно загрузите скриншот чека в разделе «Подтверждение
-                оплаты» ниже — без чека заявка не будет принята.
+                Заполните форму ниже, чтобы зарегистрировать команду. Регистрация
+                закрывается 13 июня в 00:00.
               </p>
               <div className="mt-10">
                 <RegistrationForm />
