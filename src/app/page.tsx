@@ -9,8 +9,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-// Registration closes June 13, 2026 at 00:00 (Astana, UTC+5)
-const REGISTRATION_DEADLINE = new Date("2026-06-13T00:00:00+05:00");
+// Registration closes June 14, 2026 at 00:00 (Astana, UTC+5)
+const REGISTRATION_DEADLINE = new Date("2026-06-14T00:00:00+05:00");
 
 const SPRING = { type: "spring" as const, stiffness: 100, damping: 15 };
 
@@ -254,7 +254,7 @@ export default function Home() {
           >
             Участие{" "}
             <span className="font-semibold text-[#00ff00]">бесплатное</span>.
-            Регистрация открыта до 13 июня.
+            Регистрация открыта до 14 июня.
           </motion.p>
 
           <motion.div
@@ -335,7 +335,7 @@ export default function Home() {
           <VenueSection />
 
           <p className="mt-6 text-sm text-zinc-600">
-            Регистрация закрывается 13 июня в 00:00. Участие бесплатное.
+            Регистрация закрывается 14 июня в 00:00. Участие бесплатное.
           </p>
 
           <div className="mt-12">
@@ -382,7 +382,7 @@ export default function Home() {
               </p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
                 Заполните форму ниже, чтобы зарегистрировать команду. Регистрация
-                закрывается 13 июня в 00:00.
+                закрывается 14 июня в 00:00.
               </p>
               <div className="mt-10">
                 <RegistrationForm />
