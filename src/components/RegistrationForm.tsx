@@ -5,6 +5,7 @@ import { Loader2 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import FloatingInput from "@/components/FloatingInput";
 import SuccessOverlay from "@/components/SuccessOverlay";
+import { isRegistrationOpen } from "@/lib/registration";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxOj5N0Pkc_yMQr9cakkphFSX47ttyt2NsHqxrJeQwzbqZ-BUzqSgFrP0cR9RrUl9_S/exec";
@@ -53,6 +54,12 @@ export default function RegistrationForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
+
+    if (!isRegistrationOpen()) {
+      setError("Registration is closed.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {

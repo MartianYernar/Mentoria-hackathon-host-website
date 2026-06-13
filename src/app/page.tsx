@@ -3,14 +3,17 @@
 import FAQAccordion from "@/components/FAQAccordion";
 import HackathonInfoSection from "@/components/HackathonInfoSection";
 import MentoriaLagTitle from "@/components/MentoriaLagTitle";
-import RegistrationForm from "@/components/RegistrationForm";
+import RegistrationSection from "@/components/RegistrationSection";
 import VenueSection from "@/components/VenueSection";
+import { useRegistrationOpen } from "@/hooks/useRegistrationOpen";
+import {
+  isRegistrationOpen,
+  REGISTRATION_DEADLINE,
+  REGISTRATION_DEADLINE_LABEL,
+} from "@/lib/registration";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-// Registration closes June 14, 2026 at 00:00 (Astana, UTC+5)
-const REGISTRATION_DEADLINE = new Date("2026-06-14T00:00:00+05:00");
 
 const SPRING = { type: "spring" as const, stiffness: 100, damping: 15 };
 
@@ -86,12 +89,31 @@ function TimerCard({ value, label }: { value: string; label: string }) {
 
 function HeroCountdown() {
   const [time, setTime] = useState<TimeLeft | null>(null);
+  const [closed, setClosed] = useState(false);
 
   useEffect(() => {
-    setTime(getTimeLeft());
-    const id = setInterval(() => setTime(getTimeLeft()), 1000);
+    const tick = () => {
+      setClosed(!isRegistrationOpen());
+      setTime(getTimeLeft());
+    };
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
+
+  if (closed) {
+    return (
+      <div className="rounded-xl border border-[#1a2e1a]/80 bg-[#0a0f0a]/90 px-6 py-8 backdrop-blur-sm">
+        <div className="h-[2px] bg-zinc-600" />
+        <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          Registration is closed
+        </p>
+        <p className="mt-2 text-xs text-zinc-600">
+          Регистрация завершена {REGISTRATION_DEADLINE_LABEL}
+        </p>
+      </div>
+    );
+  }
 
   if (!time) {
     return (
@@ -124,6 +146,7 @@ function HeroCountdown() {
 
 export default function Home() {
   const registerRef = useRef<HTMLElement>(null);
+  const registrationOpen = useRegistrationOpen();
 
   const scrollToRegister = useCallback(() => {
     registerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -192,14 +215,30 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#00ff00]/20 bg-[#0a120a]/80 px-5 py-2"
+            className={`mb-8 inline-flex items-center gap-2.5 rounded-full border px-5 py-2 ${
+              registrationOpen === false
+                ? "border-zinc-700/50 bg-zinc-900/80"
+                : "border-[#00ff00]/20 bg-[#0a120a]/80"
+            }`}
           >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff00] opacity-50" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00ff00]" />
+              {registrationOpen !== false && (
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff00] opacity-50" />
+              )}
+              <span
+                className={`relative inline-flex h-2 w-2 rounded-full ${
+                  registrationOpen === false ? "bg-zinc-500" : "bg-[#00ff00]"
+                }`}
+              />
             </span>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#00ff00]">
-              Регистрация открыта
+            <span
+              className={`text-[11px] font-semibold uppercase tracking-[0.16em] ${
+                registrationOpen === false ? "text-zinc-500" : "text-[#00ff00]"
+              }`}
+            >
+              {registrationOpen === false
+                ? "Регистрация закрыта"
+                : "Регистрация открыта"}
             </span>
           </motion.div>
 
@@ -254,7 +293,9 @@ export default function Home() {
           >
             Участие{" "}
             <span className="font-semibold text-[#00ff00]">бесплатное</span>.
-            Регистрация открыта до 14 июня.
+            {registrationOpen === false
+              ? ` Регистрация завершена ${REGISTRATION_DEADLINE_LABEL}.`
+              : ` Регистрация открыта до ${REGISTRATION_DEADLINE_LABEL.split(" в")[0]}.`}
           </motion.p>
 
           <motion.div
@@ -265,7 +306,9 @@ export default function Home() {
             className="mt-14 w-full max-w-2xl sm:max-w-3xl"
           >
             <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.32em] text-zinc-500">
-              До конца регистрации осталось
+              {registrationOpen === false
+                ? "Регистрация завершена"
+                : "До конца регистрации осталось"}
             </p>
             <HeroCountdown />
           </motion.div>
@@ -277,16 +320,20 @@ export default function Home() {
             variants={fadeUp}
             className="mt-12 flex w-full max-w-lg flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4"
           >
-            <button
-              type="button"
-              onClick={scrollToRegister}
-              className="w-full rounded-md bg-[#00ff00] px-8 py-3.5 text-sm font-black tracking-wide text-black transition-opacity hover:opacity-85 sm:w-auto"
-            >
-              ЗАРЕГИСТРИРОВАТЬСЯ →
-            </button>
+            {registrationOpen !== false && (
+              <button
+                type="button"
+                onClick={scrollToRegister}
+                className="w-full rounded-md bg-[#00ff00] px-8 py-3.5 text-sm font-black tracking-wide text-black transition-opacity hover:opacity-85 sm:w-auto"
+              >
+                ЗАРЕГИСТРИРОВАТЬСЯ →
+              </button>
+            )}
             <a
               href="#about"
-              className="w-full rounded-md border border-[#00ff00] bg-black px-8 py-3.5 text-center text-sm font-bold tracking-wide text-[#00ff00] transition-colors hover:bg-[#00ff00]/5 sm:w-auto"
+              className={`w-full rounded-md border border-[#00ff00] bg-black px-8 py-3.5 text-center text-sm font-bold tracking-wide text-[#00ff00] transition-colors hover:bg-[#00ff00]/5 sm:w-auto ${
+                registrationOpen === false ? "sm:mx-auto" : ""
+              }`}
             >
               УЗНАТЬ БОЛЬШЕ
             </a>
@@ -335,7 +382,7 @@ export default function Home() {
           <VenueSection />
 
           <p className="mt-6 text-sm text-zinc-600">
-            Регистрация закрывается 14 июня в 00:00. Участие бесплатное.
+            Регистрация закрывается {REGISTRATION_DEADLINE_LABEL}. Участие бесплатное.
           </p>
 
           <div className="mt-12">
@@ -359,37 +406,7 @@ export default function Home() {
           </div>
         </motion.section>
 
-        <motion.section
-          ref={registerRef}
-          id="register"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={SPRING}
-          className="scroll-mt-24 border-t border-[#0e2615] py-20"
-        >
-          <div className="overflow-hidden rounded-2xl border border-[#1a2e1a] bg-[#0a0f0a]">
-            <div className="h-[2px] bg-[#00ff00] shadow-[0_0_12px_rgba(0,255,0,0.45)]" />
-            <div className="p-8 sm:p-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#00ff00]">
-                Регистрация
-              </p>
-              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-                Забронируйте место
-              </h2>
-              <p className="mt-2 text-lg font-semibold text-[#00ff00]">
-                Участие бесплатное
-              </p>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
-                Заполните форму ниже, чтобы зарегистрировать команду. Регистрация
-                закрывается 14 июня в 00:00.
-              </p>
-              <div className="mt-10">
-                <RegistrationForm />
-              </div>
-            </div>
-          </div>
-        </motion.section>
+        <RegistrationSection ref={registerRef} />
 
         <motion.section
           id="faq"
